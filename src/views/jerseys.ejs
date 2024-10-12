@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jersey Inventory</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+  <%- include('partials/nav') %>
+  <div class="content-container">
+    <div>
+      <h2><%= title %></h2>
+      <table class="jerseys-table">
+        <thead>
+          <tr>
+            <th>Player Name</th>
+            <th>Team</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% jerseys.map((jersey) => { %>
+          <tr>
+            <td><%= jersey.player_name %></td>
+            <td><%= jersey.team_name %></td>
+            <td><%= jersey.price %></td>
+            <td>
+              <a href="/jerseys/<%=jersey.id%>/edit">Edit</a>
+              <a href="/jerseys/<%=jersey.id%>/delete" onclick="return confirm('Are your sure you want to delete <%= jersey.player_name %>?');">Delete</a>
+            </td>
+          </tr>
+        <% }); %>
+      </table>
+      <% if (locals.team) { %>
+        <div class="newJerseyButton"><a href="/teams/<%=team%>/jerseys/new">New Jersey</a></div>
+      <% } else { %>
+        <div class="newJerseyButton"><a href="/jerseys/new">New Jersey</a></div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

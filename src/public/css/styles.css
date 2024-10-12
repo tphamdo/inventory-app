@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+button,
+input[type='submit'],
+input[type='reset'] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+header {
+  background-color: whitesmoke;
+  height: 90px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  gap: 20px;
+  font-size: 1.8rem;
+}
+
+.navbar form input {
+  border-bottom: 2px solid transparent;
+}
+
+.navbar form input:hover {
+  border-bottom: 2px solid;
+}
+
+/* hide dropdown button when there are datalist options */
+input[type='text']::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+/* Chrome, Safari, Edge, Opera --> hide number input arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox --> hide number input arrows */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 1.4rem;
+}
+
+thead {
+  border-block-end: 2px solid;
+  background: whitesmoke;
+}
+
+th,
+td {
+  border: 1px solid lightgrey;
+  padding: 0.25rem 0.75rem;
+  text-align: start;
+}
+
+.jerseys-table th:last-child,
+.jerseys-table td:last-child {
+  text-align: end;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jersey-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.4rem;
+  /* align-items: center; */
+
+  .title {
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+  }
+
+  & input[type='text'],
+  input[type='number'] {
+    line-height: 1.5;
+    padding: 4px 8px;
+    margin-bottom: 8px;
+    border: none;
+    border-bottom: 1px solid;
+    font: inherit;
+  }
+
+  /* & input:-internal-autofill-selected { */
+  /*   background-color: white !important; */
+  /* } */
+
+  & input[type='submit'] {
+    background-color: whitesmoke;
+    border: 1px solid;
+    margin-top: 16px;
+    border-radius: 2px;
+    outline: none;
+  }
+
+  & input:focus {
+    outline: none;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 0s 600000s,
+    color 0s 600000s !important;
+}
+
+.newJerseyButton,
+.newTeamButton {
+  text-align: end;
+}
