@@ -84,19 +84,44 @@ thead {
 th,
 td {
   border: 1px solid lightgrey;
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 1rem;
   text-align: start;
 }
 
-.jerseys-table th:last-child,
-.jerseys-table td:last-child {
+th.price,
+td.price {
   text-align: end;
+}
+
+.buttons-div {
+  display: flex;
+  gap: 5px;
+  & button {
+    display: flex;
+    align-items: center;
+  }
+}
+
+td a {
+  display: block;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+  text-decoration: none;
 }
 
 .content-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .jersey-form {
@@ -104,7 +129,6 @@ td {
   flex-direction: column;
   justify-content: center;
   font-size: 1.4rem;
-  /* align-items: center; */
 
   .title {
     font-weight: 500;
@@ -148,5 +172,6 @@ input:-webkit-autofill:focus {
 
 .newJerseyButton,
 .newTeamButton {
+  margin-top: 5px;
   text-align: end;
 }

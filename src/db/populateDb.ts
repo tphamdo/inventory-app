@@ -20,17 +20,27 @@ INSERT INTO teams (name) VALUES
 ('Washington Commanders'),
 ('Baltimore Ravens'),
 ('New York Giants'),
-('Los Angeles Clippers')
+('Los Angeles Clippers'),
+('FC Barcelona')
 ;
 
 INSERT INTO jerseys (name, price, team_id) VALUES
 ('Jayden Daniels', 129.99, 1),
 ('Terry McLaurin', 129.99, 1),
 ('Tress Way', 129.99, 1),
+('Ryan Kerrigan', 129.99, 1),
 ('Lamar Jackson', 129.99, 2),
 ('Derrick Henry', 129.99, 2),
+('Ray Lewis', 129.99, 2),
+('Ed Reed', 129.99, 2),
+('Justin Tucker', 129.99, 2),
 ('Daniel Jones', 34.99, 3),
-('Kawhi Leonard', 119.99, 4)
+('Eli Manning', 34.99, 3),
+('Kawhi Leonard', 119.99, 4),
+('Chris Paul', 119.99, 4),
+('Lionel Messi', 349.99, 5),
+('Luis Saurez', 149.99, 5),
+('Neymar Jr', 149.99, 5)
 ;
 `;
 
