@@ -6,14 +6,15 @@ DROP TABLE IF EXISTS teams;
 
 CREATE TABLE IF NOT EXISTS jerseys (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  name VARCHAR(255),
-  price DECIMAL(12,2),
-  team_id INTEGER
+  name VARCHAR(255) NOT NULL,
+  price DECIMAL(12,2) NOT NULL,
+  quantity INT DEFAULT 0,
+  team_id INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS teams (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  name VARCHAR(255)
+  name VARCHAR(255) NOT NULL
 );
 
 INSERT INTO teams (name) VALUES
@@ -21,26 +22,26 @@ INSERT INTO teams (name) VALUES
 ('Baltimore Ravens'),
 ('New York Giants'),
 ('Los Angeles Clippers'),
-('FC Barcelona')
+('FC Barcelona'),
+('Los Angeles Lakers')
 ;
 
-INSERT INTO jerseys (name, price, team_id) VALUES
-('Jayden Daniels', 129.99, 1),
-('Terry McLaurin', 129.99, 1),
-('Tress Way', 129.99, 1),
-('Ryan Kerrigan', 129.99, 1),
-('Lamar Jackson', 129.99, 2),
-('Derrick Henry', 129.99, 2),
-('Ray Lewis', 129.99, 2),
-('Ed Reed', 129.99, 2),
-('Justin Tucker', 129.99, 2),
-('Daniel Jones', 34.99, 3),
-('Eli Manning', 34.99, 3),
-('Kawhi Leonard', 119.99, 4),
-('Chris Paul', 119.99, 4),
-('Lionel Messi', 349.99, 5),
-('Luis Saurez', 149.99, 5),
-('Neymar Jr', 149.99, 5)
+INSERT INTO jerseys (name, price, quantity, team_id) VALUES
+('Jayden Daniels', 129.99, 25, 1),
+('Terry McLaurin', 129.99, 18, 1),
+('Tress Way', 129.99, 9, 1),
+('Ryan Kerrigan', 129.99, 3, 1),
+('Lamar Jackson', 129.99, 21, 2),
+('Ray Lewis', 129.99, 8, 2),
+('Ed Reed', 129.99, 12, 2),
+('Justin Tucker', 129.99, 19, 2),
+('Daniel Jones', 34.99, 1, 3),
+('Eli Manning', 34.99, 2, 3),
+('Kawhi Leonard', 119.99, 4, 4),
+('Chris Paul', 119.99, 2, 4),
+('Lionel Messi', 349.99, 13, 5),
+('Neymar Jr', 149.99, 15, 5),
+('Lebron James', 119.99, 32, 6)
 ;
 `;
 

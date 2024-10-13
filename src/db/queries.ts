@@ -2,7 +2,7 @@ import pool from './pool';
 
 export async function getAllJerseys() {
   const SQL = `
-    SELECT j.id, j.name as player_name, j.price, t.name as team_name FROM jerseys as j
+    SELECT j.id, j.name as player_name, j.quantity, j.price, t.name as team_name FROM jerseys as j
     INNER JOIN teams as t
     ON j.team_id = t.id
     ORDER BY j.price DESC, team_name, player_name;
@@ -13,7 +13,7 @@ export async function getAllJerseys() {
 
 export async function getTeamJerseys(team: string) {
   const SQL = `
-    SELECT j.id, j.name as player_name, j.price, t.name as team_name FROM jerseys as j
+    SELECT j.id, j.name as player_name, j.quantity, j.price, t.name as team_name FROM jerseys as j
     INNER JOIN teams as t
     ON j.team_id = t.id
     WHERE t.name = $1;
@@ -22,11 +22,18 @@ export async function getTeamJerseys(team: string) {
   return rows;
 }
 
-export async function addJersey(jersey: {
+export async function addJersey({
+  name,
+  team,
+  quantity = 0,
+  price,
+}: {
   name: string;
+  quantity?: number;
   price: number;
   team: string;
 }) {
+  console.log(team);
   const SQL_MAYBE_ADD_TEAM = `
     INSERT INTO teams (name)
     SELECT CAST($1 AS VARCHAR)
@@ -34,12 +41,12 @@ export async function addJersey(jersey: {
   `;
 
   const SQL_ADD_JERSEY = `
-    INSERT INTO jerseys (name, price, team_id) VALUES
-    ($1, $2, (SELECT id FROM teams WHERE name = $3));
+    INSERT INTO jerseys (name, quantity, price, team_id) VALUES
+    ($1, $2, $3, (SELECT id FROM teams WHERE name = $4));
   `;
 
-  await pool.query(SQL_MAYBE_ADD_TEAM, [jersey.team]);
-  await pool.query(SQL_ADD_JERSEY, [jersey.name, jersey.price, jersey.team]);
+  await pool.query(SQL_MAYBE_ADD_TEAM, [team]);
+  await pool.query(SQL_ADD_JERSEY, [name, quantity, price, team]);
 }
 
 export async function getAllTeams() {
@@ -79,7 +86,7 @@ export async function deleteJersey(jerseyId: string) {
 
 export async function getJersey(jerseyId: string) {
   const SQL = `
-    SELECT j.name as player_name, j.price, t.name as team_name FROM jerseys as j
+    SELECT j.name as player_name, j.price, j.quantity, t.name as team_name FROM jerseys as j
     INNER JOIN teams as t
     ON t.id = j.team_id
     WHERE j.id = $1;
@@ -92,7 +99,7 @@ export async function getJersey(jerseyId: string) {
 
 export async function updateJersey(
   jerseyId: string,
-  updates: { name: string; price: string; team: string },
+  updates: { name: string; team: string; quantity: number; price: string },
 ) {
   const SQL_MAYBE_ADD_TEAM = `
     INSERT INTO teams (name)
@@ -107,8 +114,8 @@ export async function updateJersey(
 
   const SQL_UPDATE_JERSEY = `
     UPDATE jerseys
-    SET name = $1, price = $2, team_id = (SELECT id FROM teams WHERE name = $3)
-    WHERE jerseys.id = $4
+    SET name = $1, quantity = $2, price = $3, team_id = (SELECT id FROM teams WHERE name = $4)
+    WHERE jerseys.id = $5
   `;
 
   const SQL_MAYBE_DELETE_TEAM = `
@@ -121,6 +128,7 @@ export async function updateJersey(
   const { rows } = await pool.query(SQL_GET_OLD_TEAM_ID, [jerseyId]);
   await pool.query(SQL_UPDATE_JERSEY, [
     updates.name,
+    updates.quantity,
     updates.price,
     updates.team,
     jerseyId,

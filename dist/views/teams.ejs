@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jersey Inventory</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+  <%- include('partials/nav') %>
+  <div class="content-container">
+    <div>
+      <table class="teams-table">
+        <thead>
+          <tr>
+            <th>Teams</th>
+          </tr>
+        </thead>
+        <% teams.map((team) => { %>
+        <tr>
+          <td><a href="/teams/<%=team.name%>/jerseys"><%= team.name %></a></td>
+        </tr>
+        <% }); %>
+      </table>
+      <!-- <div class="newTeamButton"><a href="/teams/new">New Team</a></div> -->
+    </div>
+  </div>
+</body>
+</html>

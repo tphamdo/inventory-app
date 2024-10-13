@@ -27,11 +27,12 @@ export async function newTeamJerseyGet(req: Request, res: Response) {
 }
 
 export async function newJerseyPost(req: Request, res: Response) {
-  const { name, price, team } = req.body;
+  const { name, team, quantity, price } = req.body;
   await db.addJersey({
     name: name,
-    price,
     team,
+    quantity,
+    price,
   });
   res.redirect('/jerseys');
 }
@@ -48,11 +49,13 @@ export async function newTeamGet(_req: Request, res: Response) {
 export async function editJerseyGet(req: Request, res: Response) {
   const jerseyId = req.params.jerseyId;
   const teams = await db.getAllTeams();
-  const { player_name, price, team_name } = await db.getJersey(jerseyId);
+  const { player_name, price, quantity, team_name } =
+    await db.getJersey(jerseyId);
   res.render('jersey-form', {
     teams,
     player_name,
     price,
+    quantity,
     team_name,
     title: 'Edit Jersey',
   });
@@ -63,9 +66,9 @@ export async function editJerseyPost(req: Request, res: Response) {
   console.log(req.params);
   console.log(req.body);
 
-  const { name, price, team } = req.body;
+  const { name, team, price, quantity } = req.body;
   const jerseyId = req.params.jerseyId;
-  await db.updateJersey(jerseyId, { name, price, team });
+  await db.updateJersey(jerseyId, { name, team, price, quantity });
   res.redirect('/jerseys');
 }
 
